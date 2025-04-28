@@ -406,6 +406,31 @@
             justify-content: center;
             align-items: center;
         }
+
+         /* Tambahan untuk select bertingkat */
+         .sub-options {
+            margin-top: 10px;
+            display: none;
+        }
+        
+        .sub-options.active {
+            display: block;
+        }
+        
+        .category-label {
+            display: block;
+            padding: 8px 0;
+            font-weight: 500;
+            color: var(--dark);
+            border-bottom: 1px solid #eee;
+        }
+        
+        .category-group {
+            margin-bottom: 15px;
+            background-color: #f9f9f9;
+            border-radius: 5px;
+            padding: 10px;
+        }
     </style>
 </head>
 <body>
@@ -524,28 +549,36 @@
                     
                     <div class="card">
                         <div class="trash-item">
-                            <div class="trash-icon">P</div>
+                            <div class="trash-icon" style="background-color: var(--primary);">O</div>
                             <div class="trash-details">
-                                <div class="trash-type">Plastik</div>
-                                <div class="trash-weight">1.2 KG - 12 Apr 2025</div>
+                                <div class="trash-type">Organik - Sisa Makanan</div>
+                                <div class="trash-weight">1.3 KG - 12 Apr 2025</div>
+                            </div>
+                            <div class="trash-points">+130</div>
+                        </div>
+                        <div class="trash-item">
+                            <div class="trash-icon" style="background-color: var(--accent);">A</div>
+                            <div class="trash-details">
+                                <div class="trash-type">Anorganik - Plastik</div>
+                                <div class="trash-weight">1.5 KG - 10 Apr 2025</div>
+                            </div>
+                            <div class="trash-points">+150</div>
+                        </div>
+                        <div class="trash-item">
+                            <div class="trash-icon" style="background-color: var(--primary);">O</div>
+                            <div class="trash-details">
+                                <div class="trash-type">Organik - Daun dan Tanaman</div>
+                                <div class="trash-weight">2.4 KG - 5 Apr 2025</div>
                             </div>
                             <div class="trash-points">+120</div>
                         </div>
                         <div class="trash-item">
-                            <div class="trash-icon" style="background-color: var(--warning);">K</div>
+                            <div class="trash-icon" style="background-color: var(--accent);">A</div>
                             <div class="trash-details">
-                                <div class="trash-type">Kertas</div>
-                                <div class="trash-weight">2.5 KG - 10 Apr 2025</div>
+                                <div class="trash-type">Anorganik - Kertas</div>
+                                <div class="trash-weight">1.0 KG - 3 Apr 2025</div>
                             </div>
-                            <div class="trash-points">+250</div>
-                        </div>
-                        <div class="trash-item">
-                            <div class="trash-icon" style="background-color: var(--danger);">L</div>
-                            <div class="trash-details">
-                                <div class="trash-type">Logam</div>
-                                <div class="trash-weight">0.5 KG - 5 Apr 2025</div>
-                            </div>
-                            <div class="trash-points">+150</div>
+                            <div class="trash-points">+100</div>
                         </div>
                     </div>
                     
@@ -595,16 +628,41 @@
                         <h3 style="margin-bottom: 15px;">Catat Sampah Daur Ulang</h3>
                         
                         <div class="form-group">
-                            <label>Jenis Sampah</label>
-                            <select class="form-control">
-                                <option>Pilih jenis sampah</option>
-                                <option>Plastik</option>
-                                <option>Kertas</option>
-                                <option>Logam</option>
-                                <option>Kaca</option>
-                                <option>Elektronik</option>
-                                <option>Lainnya</option>
+                            <label>Kategori Sampah</label>
+                            <select class="form-control" id="kategori-sampah">
+                                <option value="">Pilih kategori sampah</option>
+                                <option value="organik">Organik</option>
+                                <option value="anorganik">Anorganik</option>
                             </select>
+                        </div>
+                        
+                        <div class="form-group sub-options" id="organik-options">
+                            <div class="category-group">
+                                <div class="category-label">Jenis Sampah Organik</div>
+                                <select class="form-control" style="margin-top: 10px;">
+                                    <option>Pilih jenis sampah organik</option>
+                                    <option>Sisa Makanan</option>
+                                    <option>Daun dan Tanaman</option>
+                                    <option>Buah dan Sayuran</option>
+                                    <option>Ranting dan Kayu</option>
+                                    <option>Lainnya</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group sub-options" id="anorganik-options">
+                            <div class="category-group">
+                                <div class="category-label">Jenis Sampah Anorganik</div>
+                                <select class="form-control" style="margin-top: 10px;">
+                                    <option>Pilih jenis sampah anorganik</option>
+                                    <option>Plastik</option>
+                                    <option>Kertas</option>
+                                    <option>Logam</option>
+                                    <option>Kaca</option>
+                                    <option>Elektronik</option>
+                                    <option>Lainnya</option>
+                                </select>
+                            </div>
                         </div>
                         
                         <div class="form-group">
@@ -685,6 +743,10 @@
                             <div style="display: flex; justify-content: space-between; margin-bottom: 5px;">
                                 <span style="color: #666;">Tanggal</span>
                                 <span>15 Apr 2025</span>
+                            </div>
+                            <div style="display: flex; justify-content: space-between; margin-bottom: 5px;">
+                                <span style="color: #666;">Kategori</span>
+                                <span>Anorganik</span>
                             </div>
                             <div style="display: flex; justify-content: space-between; margin-bottom: 5px;">
                                 <span style="color: #666;">Jenis Sampah</span>
@@ -1143,6 +1205,29 @@
                 </div>
             </div>
         </div>
+        </div>
     </div>
+
+    <!-- Script untuk menangani logika dropdown -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const kategoriSelect = document.getElementById('kategori-sampah');
+            const organikOptions = document.getElementById('organik-options');
+            const anorganikOptions = document.getElementById('anorganik-options');
+            
+            kategoriSelect.addEventListener('change', function() {
+                // Sembunyikan semua sub-options terlebih dahulu
+                organikOptions.classList.remove('active');
+                anorganikOptions.classList.remove('active');
+                
+                // Tampilkan sub-options sesuai dengan pilihan kategori
+                if (this.value === 'organik') {
+                    organikOptions.classList.add('active');
+                } else if (this.value === 'anorganik') {
+                    anorganikOptions.classList.add('active');
+                }
+            });
+        });
+    </script>
  </body>
  </html>
